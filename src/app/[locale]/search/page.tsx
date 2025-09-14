@@ -18,8 +18,11 @@ import {
   PaginationNext,
 } from '@/components/ui/pagination';
 
-/* ------------------ helpers ------------------ */
+const PAGE_SIZE = 5;
+const HEADER_HEIGHT = 80;
+const SCROLL_DURATION = 450;
 
+// Helpers
 function normalizeArabic(text: string) {
   return text
     .toLowerCase()
@@ -38,13 +41,6 @@ function hasLatin(text: string) {
   return /[A-Za-z]/.test(text);
 }
 
-const PAGE_SIZE = 5;
-// Header height in px (positive). Adjust to your sticky header height if needed.
-const HEADER_HEIGHT = 80;
-const SCROLL_DURATION = 450; // ms
-
-/* ------------------ component ------------------ */
-
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -62,32 +58,26 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [scrollTrigger, setScrollTrigger] = useState(0);
 
-  // keep state in sync with URL when user navigates
+  // Sync state with URL
   useEffect(() => {
     setRawQuery(searchParams.get('q') || '');
     setCurrentPage(parseInt(searchParams.get('page') || '1', 10));
   }, [searchParams]);
 
-  // Normalization & detection
   const arabicMode = hasArabic(rawQuery);
   const query = arabicMode ? normalizeArabic(rawQuery) : normalizeEnglish(rawQuery);
 
-  // Filter using translated title for current locale (next-intl)
+  // Filter results
   const filteredResults = useMemo(() => {
     return LEGAL_SERVICES_SECTIONS.filter((section) => {
       const translatedTitle = t(section.titleKey, { defaultMessage: section.titleKey });
-
       const normalizedArabicTitle = normalizeArabic(translatedTitle);
       const normalizedEnglishTitle = normalizeEnglish(translatedTitle);
-
-      if (arabicMode) {
-        return normalizedArabicTitle.includes(query);
-      } else {
-        return (
-          normalizedEnglishTitle.includes(query) ||
-          normalizedArabicTitle.includes(normalizeArabic(query))
-        );
-      }
+      if (arabicMode) return normalizedArabicTitle.includes(query);
+      return (
+        normalizedEnglishTitle.includes(query) ||
+        normalizedArabicTitle.includes(normalizeArabic(query))
+      );
     });
   }, [query, arabicMode, t]);
 
@@ -97,7 +87,6 @@ export default function SearchPage() {
     currentPage * PAGE_SIZE
   );
 
-  // Validation
   const validationSchema = Yup.object().shape({
     search: Yup.string()
       .trim()
@@ -109,11 +98,10 @@ export default function SearchPage() {
       .required(t('required', { defaultMessage: 'Search is required' })),
   });
 
-  // Replace/insert locale into path. e.g. "/en/search" -> "/ar/search"
   function withLocale(path: string, targetLocale: string) {
     if (!path) return `/${targetLocale}`;
     const p = path.startsWith('/') ? path : '/' + path;
-    const parts = p.split('/'); // ['', 'en', 'search', ...] or ['', 'search', ...]
+    const parts = p.split('/');
     if (parts.length > 1 && /^[a-z]{2}$/i.test(parts[1])) {
       parts[1] = targetLocale;
       return parts.join('/') || `/${targetLocale}`;
@@ -123,7 +111,6 @@ export default function SearchPage() {
     }
   }
 
-  // Build URL and navigate. If targetLocale provided, use it; otherwise keep current locale.
   const updateUrl = (search: string, page = 1, targetLocale?: string) => {
     const params = new URLSearchParams();
     if (search) params.set('q', search);
@@ -133,8 +120,7 @@ export default function SearchPage() {
     router.push(`${newPath}?${params.toString()}`);
   };
 
-  /* ======== robust RAF animator and helpers ======== */
-
+  // Cancel RAF on unmount
   const cancelRaf = useCallback(() => {
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
@@ -146,64 +132,54 @@ export default function SearchPage() {
     return () => cancelRaf();
   }, [cancelRaf]);
 
-  function easeInOutQuad(t: number) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  }
+  const easeInOutQuad = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
-  function animateScroll(container: HTMLElement | Element, from: number, to: number, duration: number) {
-    cancelRaf();
-    const startTime = performance.now();
-
-    function step(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = easeInOutQuad(progress);
-      const current = Math.round(from + (to - from) * eased);
-
-      if (container === document.scrollingElement || container === document.documentElement) {
-        window.scrollTo(0, current);
-        try {
-          (document.scrollingElement || document.documentElement).scrollTop = current;
-        } catch {}
-      } else {
-        (container as HTMLElement).scrollTop = current;
-      }
-
-      if (progress < 1) {
-        rafRef.current = requestAnimationFrame(step);
-      } else {
-        rafRef.current = null;
-      }
-    }
-
-    rafRef.current = requestAnimationFrame(step);
-  }
-
-  function findScrollParent(el: HTMLElement | null): HTMLElement | Element {
-    if (!el) return document.scrollingElement || document.documentElement;
-    let node: HTMLElement | null = el.parentElement;
-    while (node) {
-      const style = getComputedStyle(node);
-      const overflowY = style.overflowY;
-      const canScroll = (overflowY === 'auto' || overflowY === 'scroll') && node.scrollHeight > node.clientHeight;
-      if (canScroll) return node;
-      node = node.parentElement;
-    }
-    return document.scrollingElement || document.documentElement;
-  }
-
+  // Run scroll after results are loaded
   const runScrollToResults = useCallback(() => {
     const el = resultsRef.current;
     if (!el) return;
+
+    const animateScroll = (container: HTMLElement | Element, from: number, to: number, duration: number) => {
+      cancelRaf();
+      const startTime = performance.now();
+      const step = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutQuad(progress);
+        const current = Math.round(from + (to - from) * eased);
+
+        if (container === document.scrollingElement || container === document.documentElement) {
+          window.scrollTo(0, current);
+        } else {
+          (container as HTMLElement).scrollTop = current;
+        }
+
+        if (progress < 1) rafRef.current = requestAnimationFrame(step);
+        else rafRef.current = null;
+      };
+      rafRef.current = requestAnimationFrame(step);
+    };
+
+    const container = (function findScrollParent(el: HTMLElement | null): HTMLElement | Element {
+      if (!el) return document.scrollingElement || document.documentElement;
+      let node: HTMLElement | null = el.parentElement;
+      while (node) {
+        const style = getComputedStyle(node);
+        const overflowY = style.overflowY;
+        const canScroll = (overflowY === 'auto' || overflowY === 'scroll') && node.scrollHeight > node.clientHeight;
+        if (canScroll) return node;
+        node = node.parentElement;
+      }
+      return document.scrollingElement || document.documentElement;
+    })(el);
+
     requestAnimationFrame(() => {
-      const container = findScrollParent(el);
       if (container === document.scrollingElement || container === document.documentElement) {
         const start = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
         const elTop = el.getBoundingClientRect().top + start;
         let target = Math.round(elTop - HEADER_HEIGHT);
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        if (target > max) target = max;
-        if (target < 0) target = 0;
+        target = Math.min(Math.max(target, 0), max);
         animateScroll(document.scrollingElement || document.documentElement, start, target, SCROLL_DURATION);
       } else {
         const containerEl = container as HTMLElement;
@@ -213,40 +189,25 @@ export default function SearchPage() {
         const diff = elRect.top - containerRect.top;
         let target = Math.round(start + diff - HEADER_HEIGHT);
         const max = containerEl.scrollHeight - containerEl.clientHeight;
-        if (target > max) target = max;
-        if (target < 0) target = 0;
+        target = Math.min(Math.max(target, 0), max);
         animateScroll(containerEl, start, target, SCROLL_DURATION);
       }
     });
-  }, []);
+  }, [cancelRaf]);
 
-  // run scroll AFTER loading ends and results are rendered
   useEffect(() => {
-    if (loading) return;
-    if (scrollTrigger > 0) {
-      runScrollToResults();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollTrigger, loading, currentPage, paginatedResults.length]);
-
-  /* ========== Handlers ========== */
+    if (!loading && scrollTrigger > 0) runScrollToResults();
+  }, [scrollTrigger, loading, currentPage, paginatedResults.length, runScrollToResults]);
 
   const handleSearch = (values: { search: string }) => {
     const searchValue = values.search.trim();
-
-    // decide target locale:
-    // - if contains Arabic characters -> 'ar'
-    // - else if contains Latin letters -> 'en'
-    // - otherwise keep current locale
-    let targetLocale: string | undefined;
+    let targetLocale = currentLocale;
     if (hasArabic(searchValue)) targetLocale = 'ar';
     else if (hasLatin(searchValue)) targetLocale = 'en';
-    else targetLocale = currentLocale;
 
     setLoading(true);
     setTimeout(() => {
       updateUrl(searchValue, 1, targetLocale);
-      // reflect locally (will be re-synced from URL on navigation)
       setRawQuery(searchValue);
       setCurrentPage(1);
       setLoading(false);
@@ -264,7 +225,7 @@ export default function SearchPage() {
     }, 300);
   };
 
-  /* ========== Render ========== */
+  /* ======= Render ======= */
 
   return (
     <div className="relative min-h-screen font-sans text-[#4A2E2B] mt-16 pb-12">
@@ -274,7 +235,8 @@ export default function SearchPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(75,38,21,0.5)] to-[rgba(75,38,21,0.85)]" />
         <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-6 text-center">
           <h1 className="text-lg sm:text-2xl md:text-4xl font-semibold text-white break-words">
-            { rawQuery.length > 0 ? t('searchResults', { defaultMessage: 'Search Results' }) + ': ' : t('searchServices') }<span className="font-normal">{rawQuery}</span>
+            { rawQuery.length > 0 ? t('searchResults', { defaultMessage: 'Search Results' }) + ': ' : t('searchServices') }
+            <span className="font-normal">{rawQuery}</span>
           </h1>
         </div>
       </div>
@@ -307,10 +269,7 @@ export default function SearchPage() {
                     errors.search && touched.search ? 'border-red-500' : 'border-gray-300'
                   }`}
                   dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}
-                  onChange={(e) => {
-                    const clean = e.target.value.replace(/[^\p{L}\p{N}\s]/gu, '');
-                    setFieldValue('search', clean);
-                  }}
+                  onChange={(e) => setFieldValue('search', e.target.value.replace(/[^\p{L}\p{N}\s]/gu, ''))}
                 />
                 <ErrorMessage name="search" component="div" className="text-red-500 text-sm mt-1" />
               </div>
@@ -321,10 +280,7 @@ export default function SearchPage() {
       </div>
 
       {/* Results */}
-      <div
-        ref={resultsRef}
-        className="max-w-6xl mx-auto px-4 sm:px-6 py-8 mt-4 sm:mt-6 relative z-10 min-h-[500px] flex flex-col justify-between"
-      >
+      <div ref={resultsRef} className="max-w-6xl mx-auto px-4 sm:px-6 py-8 mt-4 sm:mt-6 relative z-10 min-h-[500px] flex flex-col justify-between">
         {loading ? (
           <div className="space-y-4 flex-1">
             {[...Array(PAGE_SIZE)].map((_, i) => (

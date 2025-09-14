@@ -40,12 +40,12 @@ export default function Service() {
       {/* Hero Section */}
       <div className="relative w-full h-screen max-h-[600px] mb-12">
         {/* Background Image */}
-        <img
-          src="/cover.png"
-          alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
+      <Image
+        src="/cover.png"
+        alt="Hero Background"
+        fill
+        className="object-cover"
+      />
         {/* Gradient Overlay */}
         <div
           className="absolute inset-0 z-0"

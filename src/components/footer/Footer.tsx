@@ -2,8 +2,12 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { FaTwitter, FaFacebookF, FaGooglePlusG } from 'react-icons/fa';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+
+interface FormValues {
+  email: string;
+}
 
 export default function Footer() {
   const locale = useLocale();
@@ -24,7 +28,10 @@ export default function Footer() {
       .required(t('emailRequired')),
   });
 
-  const handleSubmit = (values: { email: string }, { resetForm }: any) => {
+  const handleSubmit = (
+    values: FormValues,
+    { resetForm }: FormikHelpers<FormValues>
+  ) => {
     console.log('Subscribed email:', values.email);
     resetForm();
     alert(t('subscriptionSuccess'));
@@ -50,7 +57,7 @@ export default function Footer() {
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form className="flex flex-col gap-1 p-2  bg-white rounded-md relative">
+              <Form className="flex flex-col gap-1 p-2 bg-white rounded-md relative">
                 <div className="flex items-center border border-white rounded-md overflow-hidden">
                   <Field
                     type="email"
@@ -66,7 +73,7 @@ export default function Footer() {
                     {t('subscribe')}
                   </button>
                 </div>
-                <div className='absolute -bottom-5 left-1 right-1'>
+                <div className="absolute -bottom-5 left-1 right-1">
                   <ErrorMessage
                     name="email"
                     component="div"

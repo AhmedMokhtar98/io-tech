@@ -105,8 +105,9 @@ export default function TestimonialSection() {
               >
                 <div>
                   <p className="text-gray-300 leading-relaxed text-lg mb-6">
-                    "{current.quote}"
+                    {`"${current.quote}"`}
                   </p>
+
                   {/* Name + Title BELOW TEXT */}
                   <h4 className="font-bold text-xl">{current.name}</h4>
                   <span className="text-gray-400 text-base">{current.title}</span>

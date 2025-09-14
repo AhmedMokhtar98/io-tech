@@ -12,7 +12,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { LEGAL_SERVICES_SECTIONS } from '@/constants/legalServicesData';
 import Drawer from "../ui/Drawer";
-import { LOCALES, buildLocalePath, buildLocaleUrlFor, stripLocalePrefix } from "@/lib/i18n/i18n";
+import { stripLocalePrefix } from "@/lib/i18n/i18n";
 
 // ----------------- Helpers -----------------
 const onlyLettersNumbersSpaces = /^[\p{L}\p{N}\s]+$/u;

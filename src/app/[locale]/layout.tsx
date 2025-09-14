@@ -1,30 +1,35 @@
+import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import messagesEn from "@/translations/en.json";
+import messagesAr from "@/translations/ar.json";
 
 export const generateStaticParams = () => [
   { locale: "en" },
-  { locale: "ar" }
+  { locale: "ar" },
 ];
 
-interface Props {
-  children: React.ReactNode;
-  params: { locale: string };
+type Locale = "en" | "ar";
+
+interface LayoutProps {
+  children: ReactNode;
+  params: { locale: Locale };
 }
 
-export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = params;
+// Synchronously map locales to messages
+const messagesMap: Record<Locale, Record<string, string>> = {
+  en: messagesEn,
+  ar: messagesAr,
+};
+
+export default async function LocaleLayout({ children, params }: LayoutProps) {
+  const { locale } = await params; // Await params to ensure it's resolved
 
   if (!["en", "ar"].includes(locale)) notFound();
 
-  let messages;
-  try {
-    messages = await getMessages({ locale });
-  } catch {
-    messages = await getMessages({ locale: "en" });
-  }
+  const messages = messagesMap[locale];
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>

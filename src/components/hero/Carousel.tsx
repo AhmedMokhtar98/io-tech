@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 
 type Slide = {
   title: string;
@@ -77,11 +78,15 @@ export default function FullScreenCarousel() {
             className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-center"
           >
             {/* Background Image */}
-            <img
-              src={slide.background}
-              alt={slide.title}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            <div className="absolute inset-0 w-full h-full">
+              <Image
+                src={slide.background}
+                alt={slide.title}
+                fill
+                className="object-cover"
+                priority // optional: load immediately if it’s a hero/background image
+              />
+            </div>
 
             {/* Gradient Overlay */}
             <div
@@ -100,11 +105,15 @@ export default function FullScreenCarousel() {
                   ${locale === "ar" ? "lg:left-40" : "lg:right-40"}
                   w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px]`}
               >
-                <img
+               <div className="relative w-full h-full">
+                <Image
                   src={slide.image}
                   alt={slide.title}
-                  className="object-cover rounded-lg shadow-lg w-full h-full"
+                  fill
+                  className="object-cover rounded-lg shadow-lg"
+                  sizes="100vw" // optional, can help with responsive loading
                 />
+              </div>
               </div>
 
               {/* Text */}

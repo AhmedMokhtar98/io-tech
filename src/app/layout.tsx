@@ -1,4 +1,3 @@
-// app/layout.tsx
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 
@@ -7,25 +6,30 @@ export const metadata = {
   description: "Transport solutions website",
 };
 
-// 'params' comes from Next.js App Router for dynamic routes like /[locale]/...
-export default function RootLayout({
+// Recursive type that allows arrays
+type Messages = {
+  [key: string]: string | Messages | Array<string | Messages>;
+};
+
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string }; // guaranteed
+  params: { locale: string };
 }) {
   const locale = params.locale;
 
-  let messages;
+  let messages: Messages;
+
   try {
-    messages = require(`../translations/${locale}.json`).default;
+    messages = (await import(`../translations/${locale}.json`)).default;
   } catch {
-    messages = require(`../translations/en.json`).default;
+    messages = (await import(`../translations/en.json`)).default;
   }
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
@@ -34,4 +38,3 @@ export default function RootLayout({
     </html>
   );
 }
-
