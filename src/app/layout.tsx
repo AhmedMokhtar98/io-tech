@@ -2,8 +2,8 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 
 export const metadata = {
-  title: "Masarat For Transport",
-  description: "Transport solutions website",
+  title: "IO Tech Task",
+  description: "IO Tech Task by Ahmed Mokhtar",
 };
 
 // Recursive type that allows arrays
