@@ -1,0 +1,402 @@
+{
+   "navbar": {
+    "home": "Home",
+    "about": "About us",
+    "services": "Services",
+    "ourTeam": "Our Team",
+    "blogs": "Blogs",
+    "contact": "Contact Us",
+    "book": "Book Appointment",
+    "team":"Our Team",
+    "language": "Language",
+    "searchHolder": "Search...",
+    "general": {
+      "title": "General Legal Consultation"
+    },
+    "corporate": {
+      "title": "Corporate Legal Consultation"
+    },
+    "individual": {
+      "title": "Individual Legal Consultation"
+    },
+
+    "legalConsultationServices": {
+      "title": "Legal Consultation Services"
+    },
+    "defenseInAllCases": {
+      "title": "Defense in All Cases"
+    },
+    "servicesForCompaniesAndInstitutions": {
+      "title": "Services for Companies and Institutions"
+    },
+    "establishingNationalAndForeignCompanies": {
+      "title": "Establishing National and Foreign Companies"
+    },
+    "foreignInvestmentServices": {
+      "title": "Foreign Investment Services"
+    },
+    "banksAndFinancialInstitutions": {
+      "title": "Banks and Financial Institutions"
+    },
+    "arbitration": {
+      "title": "Arbitration"
+    },
+    "commercialAgencies": {
+      "title": "Commercial Agencies"
+    },
+    "contracts": {
+      "title": "Contracts"
+    },
+    "corporateGovernanceServices": {
+      "title": "Corporate Governance Services"
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property"
+    },
+    "supportingVision2030": {
+      "title": "Supporting Vision 2030"
+    },
+    "notarization": {
+      "title": "Notarization"
+    },
+    "companiesLiquidation": {
+      "title": "Companies Liquidation"
+    },
+    "corporateRestructuringAndReorganization": {
+      "title": "Corporate Restructuring and Reorganization"
+    },
+    "estates": {
+      "title": "Estates"
+    },
+    "insurance": {
+      "title": "Insurance"
+    },
+    "internalRegulationsForCompanies": {
+      "title": "Internal Regulations for Companies"
+    }
+  },
+  "carousel": {
+  "slide1": {
+    "title": "Lorem Ipsum",
+    "description": "Lorem Ipsum is simply dummy text of the printing industry.",
+    "buttonText": "Read More"
+  },
+  "slide2": {
+    "title": "Another Slide",
+    "description": "Description for the second slide goes here.",
+    "buttonText": "Read More"
+  }
+},
+"team":{
+  "title": "Meet Our Team",
+  "description": "Our team consists of talented and experienced professionals committed to delivering exceptional results.",
+  "team": {
+    "john": { "name": "John Doe", "position": "CEO" },
+    "jane": { "name": "Jane Smith", "position": "Designer" },
+    "alice": { "name": "Alice Johnson", "position": "Developer" },
+    "bob": { "name": "Bob Brown", "position": "Marketing" }
+  }
+},
+  "NotFound": {
+    "message": "Sorry, the page you are looking for could not be found.",
+    "homeButton": "Go Home"
+  },
+  "testimonials": {
+    "title": "What our clients are saying",
+    "description": "Our clients range from individual investors, to local, international as well as Fortune 500 companies.",
+    "testimonials": [
+    {
+      "name": "Mohammed Saif",
+      "title": "CEO/Company",
+      "quote": "With the help of the hospitable staff of Al Safar and Partners, I was able to get my work done without any hassle. The team guided me through every step with professionalism and kept me updated regularly about the progress of my case. Their prompt responses and attention to detail made me feel supported at all times, which gave me peace of mind and confidence that I was in good hands.",
+      "image": "/me.jpg"
+    },
+    {
+      "name": "John Doe",
+      "title": "Investor",
+      "quote": "My experience with Al Safar and Partners was excellent from the very first consultation. The team listened carefully to my goals, provided clear advice, and helped me make the right decisions with confidence. Their responsiveness and transparency at every stage made the process smooth and stress-free, leaving me reassured that my interests were always a priority.",
+      "image": "/me.jpg"
+    }
+  ]
+  },
+  "footer": {
+    "emailPlaceholder": "Email",
+    "subscribe": "Subscribe",
+    "contacts": "Contacts",
+    "about": "About",
+    "strategy": "Our Strategy",
+    "advantages": "Our Advantages",
+    "social": "Social Responsibility",
+    "services": "Our Services",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Please enter a valid email address.",
+    "subscriptionSuccess": "You have subscribed successfully!",
+    "copyright": "All rights reserved."
+  },
+  "search": {
+    "searchResults": "Search Results for",
+    "searchPlaceholder": "Search for services...",
+    "searchButton": "Search",
+    "enterQuery": "Please enter a search query.",
+    "noResults": "No results found.",
+    "minChars": "Enter at least 1 character",
+    "required": "Search is required"
+  },
+  "services": {
+    "searchResults": "Search Results for",
+    "searchServices": "Search for our services",
+    "searchPlaceholder": "Search for services...",
+    "invalidChars": "Only letters and numbers are allowed.",
+    "searchButton": "Search",
+    "enterQuery": "Please enter a search query.",
+    "noResults": "No results found.",
+    "minChars": "Enter at least 1 character",
+    "required": "Search is required",
+    "back": "Back",
+    "sectionNotFound": "Section not found",
+    "footer": "We offer the best legal advice tailored to your needs.",
+    "general": {
+      "title": "General Legal Consultation",
+      "overview": "Overview",
+      "content1": "We provide comprehensive legal advice covering various aspects of law for individuals and businesses.",
+      "content2": "Our goal is to ensure our clients understand their rights and obligations.",
+      "list": [
+        "Civil cases guidance.",
+        "Administrative matters.",
+        "Contracts review and advice."
+      ]
+    },
+    "corporate": {
+      "title": "Corporate Legal Consultation",
+      "formation": "Company Formation",
+      "content1": "We assist companies in registration and corporate setup.",
+      "content2": "We provide guidance on legal structuring and compliance.",
+      "list": [
+        "Company registration.",
+        "Drafting contracts and agreements.",
+        "Commercial disputes support."
+      ],
+      "operations": "Operations and Compliance",
+      "content3": "We advise on daily operations, employee matters, and corporate governance.",
+      "list2": [
+        "Employment contracts.",
+        "Internal policies."
+      ],
+      "governance": "Corporate Governance",
+      "content4": "Ensure your business complies with corporate governance standards."
+    },
+    "individual": {
+      "title": "Individual Legal Consultation",
+      "familyLaw": "Family Law",
+      "content1": "Support for divorce, alimony, custody, and family disputes.",
+      "list": [
+        "Divorce and separation.",
+        "Child custody and alimony.",
+        "Inheritance matters."
+      ],
+      "realEstate": "Real Estate Matters",
+      "content2": "Advice on buying, selling, and renting property.",
+      "list2": [
+        "Property purchase.",
+        "Property rental and leasing."
+      ],
+      "employmentAndCriminal": "Employment and Criminal Cases",
+      "content3": "We defend individual rights in employment and criminal cases.",
+      "list3": [
+        "Employment disputes.",
+        "Criminal defense services."
+      ]
+    },
+    "legalConsultationServices": {
+      "title": "Legal Consultation Services",
+      "introduction": "Introduction",
+      "content1": "Law Firm provides comprehensive advisory services for individuals and companies.",
+      "scope": "Scope of Services",
+      "content2": "Our consultations cover corporate, civil, criminal, and administrative matters.",
+      "methodology": "Methodology",
+      "content3": "We provide personalized advice tailored to the client’s needs."
+    },
+    "defenseInAllCases": {
+      "title": "Defense in All Cases",
+      "overview": "Overview",
+      "content1": "Our team offers legal defense in all types of cases.",
+      "civil": "Civil Cases",
+      "content2": "Expert assistance in civil disputes and negotiations.",
+      "criminal": "Criminal Cases",
+      "content3": "Defense and representation in criminal matters."
+    },
+    "servicesForCompaniesAndInstitutions": {
+      "title": "Services for Companies and Institutions",
+      "advisory": "Advisory Services",
+      "content1": "Providing legal advice to support company growth and compliance.",
+      "compliance": "Compliance Services",
+      "content2": "Ensuring adherence to local and international regulations.",
+      "contracts": "Contract Management",
+      "content3": "Drafting and reviewing contracts for companies and institutions."
+    },
+    "establishingNationalAndForeignCompanies": {
+      "title": "Establishing National and Foreign Companies",
+      "local": "Local Company Setup",
+      "content1": "Assistance in registering companies domestically.",
+      "international": "International Company Setup",
+      "content2": "Guidance for foreign company registration.",
+      "advisory": "Advisory Services",
+      "content3": "Support with legal structuring and documentation."
+    },
+    "foreignInvestmentServices": {
+      "title": "Foreign Investment Services",
+      "introduction": "Introduction",
+      "content1": "Helping foreign investors comply with local laws.",
+      "guidance": "Investment Guidance",
+      "content2": "Strategic advice for maximizing investment benefits.",
+      "compliance": "Legal Compliance",
+      "content3": "Ensuring adherence to international investment regulations."
+    },
+    "banksAndFinancialInstitutions": {
+      "title": "Banks and Financial Institutions",
+      "overview": "Overview",
+      "content1": "Legal support tailored for the banking sector.",
+      "regulation": "Regulatory Compliance",
+      "content2": "Ensuring adherence to financial laws and regulations.",
+      "disputeResolution": "Dispute Resolution",
+      "content3": "Handling banking disputes and contractual issues."
+    },
+    "arbitration": {
+      "title": "Arbitration",
+      "overview": "Overview",
+      "content1": "Professional arbitration services for resolving disputes.",
+      "process": "Arbitration Process",
+      "content2": "Guidance through arbitration steps and procedures.",
+      "benefits": "Benefits",
+      "content3": "Efficient dispute resolution compared to litigation."
+    },
+    "commercialAgencies": {
+      "title": "Commercial Agencies",
+      "overview": "Overview",
+      "content1": "Legal support in establishing commercial agencies.",
+      "registration": "Registration",
+      "content2": "Assistance in legal registration and licensing.",
+      "management": "Management",
+      "content3": "Advisory on contracts, operations, and compliance."
+    },
+    "contracts": {
+      "title": "Contracts",
+      "drafting": "Drafting",
+      "content1": "Creating legal contracts tailored to client needs.",
+      "review": "Reviewing",
+      "content2": "Examining existing contracts for compliance.",
+      "negotiation": "Negotiation",
+      "content3": "Negotiating contract terms to protect client interests."
+    },
+    "corporateGovernanceServices": {
+      "title": "Corporate Governance Services",
+      "overview": "Overview",
+      "content1": "Ensuring corporate compliance and governance.",
+      "policies": "Policies",
+      "content2": "Developing internal rules and procedures.",
+      "compliance": "Compliance",
+      "content3": "Monitoring adherence to governance standards."
+    },
+    "intellectualProperty": {
+      "title": "Intellectual Property",
+      "overview": "Overview",
+      "content1": "Protecting intellectual property rights.",
+      "protection": "Protection",
+      "content2": "Legal registration and enforcement.",
+      "management": "Management",
+      "content3": "Handling licensing, disputes, and IP strategy."
+    },
+    "supportingVision2030": {
+      "title": "Supporting Vision 2030",
+      "overview": "Overview",
+      "content1": "Providing legal services aligned with Vision 2030 goals.",
+      "projects": "Projects",
+      "content2": "Supporting strategic projects and initiatives.",
+      "legalSupport": "Legal Support",
+      "content3": "Ensuring compliance with national development programs."
+    },
+    "notarization": {
+      "title": "Notarization",
+      "overview": "Overview",
+      "content1": "Certified notarization for legal documents.",
+      "services": "Services",
+      "content2": "Authentication and verification of contracts.",
+      "compliance": "Compliance",
+      "content3": "Ensuring legal validity for all documents."
+    },
+    "companiesLiquidation": {
+      "title": "Companies Liquidation",
+      "overview": "Overview",
+      "content1": "Legal guidance on company liquidation.",
+      "process": "Process",
+      "content2": "Step-by-step liquidation procedures.",
+      "advisory": "Advisory",
+      "content3": "Helping companies manage financial and legal responsibilities."
+    },
+    "corporateRestructuringAndReorganization": {
+      "title": "Corporate Restructuring and Reorganization",
+      "overview": "Overview",
+      "content1": "Assistance with corporate restructuring.",
+      "process": "Process",
+      "content2": "Planning and executing organizational changes.",
+      "legalSupport": "Legal Support",
+      "content3": "Ensuring compliance and minimizing risk."
+    },
+    "estates": {
+      "title": "Estates",
+      "overview": "Overview",
+      "content1": "Legal guidance on estate management.",
+      "inheritance": "Inheritance",
+      "content2": "Support for wills, inheritance, and succession.",
+      "disputes": "Disputes",
+      "content3": "Resolving disputes regarding estates."
+    },
+    "insurance": {
+      "title": "Insurance",
+      "overview": "Overview",
+      "content1": "Legal support for insurance matters.",
+      "policies": "Policies",
+      "content2": "Drafting and reviewing insurance policies.",
+      "claims": "Claims",
+      "content3": "Assistance with insurance claims and disputes."
+    },
+    "internalRegulationsForCompanies": {
+      "title": "Internal Regulations for Companies",
+      "overview": "Overview",
+      "content1": "Drafting and reviewing internal company regulations.",
+      "drafting": "Drafting",
+      "content2": "Preparing internal rules and procedures.",
+      "compliance": "Compliance",
+      "content3": "Ensuring adherence to company policies and regulations."
+    }
+  },
+  "aboutPage":{
+    "about": "About Us",
+    "heroSubtitle": "Building modern web experiences with passion",
+    "missionTitle": "Our Mission",
+    "missionDescription": "We aim to empower developers and businesses with modern web solutions, combining clean design with efficient code.",
+    "storyTitle": "Our Journey",
+    "milestone1": { "year": "2015", "description": "Company founded with a vision to innovate." },
+    "milestone2": { "year": "2018", "description": "Launched our first product for web developers." },
+    "milestone3": { "year": "2022", "description": "Expanded to global markets and grew our team." },
+    "valuesInnovation": "Innovation",
+    "valuesInnovationDesc": "We constantly strive to bring new ideas to life.",
+    "valuesIntegrity": "Integrity",
+    "valuesIntegrityDesc": "We maintain honesty and transparency in everything we do.",
+    "valuesGrowth": "Growth",
+    "valuesGrowthDesc": "We focus on continuous learning and improvement."
+  },
+  "teamPage":{
+      "team": "Our Team",
+      "heroSubtitle": "Meet the passionate people behind our success",
+      "missionTitle": "Our Mission",
+      "missionDescription": "We aim to empower developers and businesses with modern web solutions, combining clean design with efficient code.",
+      "valuesInnovation": "Innovation",
+      "valuesInnovationDesc": "We constantly strive to bring new ideas to life.",
+      "valuesIntegrity": "Integrity",
+      "valuesIntegrityDesc": "We maintain honesty and transparency in everything we do.",
+      "valuesCollaboration": "Collaboration",
+      "valuesCollaborationDesc": "Teamwork drives our success."
+}
+}
+
