@@ -142,21 +142,6 @@ export function cancelRaf(rafRef: MutableRefObject<number | null>): void {
   rafRef.current = null;
 }
 
-/* -------------------- VALIDATION -------------------- */
-export function getValidationSchema(
-  t: (key: string, opts?: Record<string, string>) => string
-) {
-  return Yup.object({
-    search: Yup.string()
-      .trim()
-      .matches(
-        /^[\p{L}\p{N}\s]+$/u,
-        t("invalidChars", { defaultMessage: "Only letters and numbers allowed." })
-      )
-      .min(1, t("minChars", { defaultMessage: "Enter at least 1 character" }))
-      .required(t("required", { defaultMessage: "Search is required" })),
-  });
-}
 
 /* -------------------- QUERY + RESULTS -------------------- */
 export function syncQueryState(searchParams: URLSearchParams) {

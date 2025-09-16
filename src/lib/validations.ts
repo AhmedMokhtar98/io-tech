@@ -5,7 +5,7 @@ import * as Yup from "yup";
 export const onlyLettersNumbersSpaces = /^[\p{L}\p{N}\s]+$/u;
 
 // ----------------- Search Schema -----------------
-export const getSearchSchema = (t: (key: string) => string) =>
+export const searchSchema = (t: (key: string) => string) =>
   Yup.object().shape({
     query: Yup.string()
       .trim()
@@ -16,9 +16,8 @@ export const getSearchSchema = (t: (key: string) => string) =>
       .min(1, t("minChar"))
       .required(t("required")),
   });
-
 // ----------------- Footer Email Schema -----------------
-export const getEmailSchema = (t: (key: string) => string) =>
+export const emailSchema = (t: (key: string) => string) =>
   Yup.object({
     email: Yup.string()
       .email(t("emailInvalid"))

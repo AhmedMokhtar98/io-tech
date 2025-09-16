@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { PaginationControls } from '@/components/ui/pagination';
 
 import {
-  getValidationSchema,
   scrollToElement,
   handleSearchAction,
   handlePageChangeAction,
@@ -20,6 +19,7 @@ import {
   filterResults,
   paginateResults,
 } from '@/lib/utils';
+import { searchSchema } from '@/lib/validations';
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
@@ -80,7 +80,7 @@ export default function SearchPage() {
       <div className="max-w-3xl mx-auto px-4 mt-6">
         <Formik
           initialValues={{ search: rawQuery }}
-          validationSchema={getValidationSchema(t)}
+          validationSchema={searchSchema(t)}
           onSubmit={(values) =>
             handleSearchAction(
               values.search.trim(),

@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { FaTwitter, FaFacebookF, FaGooglePlusG } from 'react-icons/fa';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
-import { getEmailSchema } from '@/lib/validations';
+import { emailSchema } from '@/lib/validations';
 
 interface FormValues {
   email: string;
@@ -48,7 +48,7 @@ export default function Footer() {
           {/* Email Form */}
           <Formik
             initialValues={{ email: '' }}
-            validationSchema={getEmailSchema(t)}
+            validationSchema={emailSchema(t)}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (

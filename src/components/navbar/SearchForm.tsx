@@ -4,7 +4,7 @@
 import { Formik, Form } from "formik";
 import { FaSearch } from "react-icons/fa";
 import { hasArabic, sanitizeInput, onSubmitSearch } from "@/lib/utils";
-import { getSearchSchema } from "@/lib/validations";
+import { searchSchema } from "@/lib/validations";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -19,15 +19,15 @@ export default function SearchForm({ initialQuery, locale, router }: Props) {
   return (
     <Formik
       enableReinitialize
-      initialValues={{ query: initialQuery || "" }}
-      validationSchema={getSearchSchema(t)}
+      initialValues={{ search: initialQuery || "" }}
+      validationSchema={searchSchema(t)}
       onSubmit={async (vals, formikHelpers) => {
         const errors = await formikHelpers.validateForm();
         if (Object.keys(errors).length > 0) {
           formikHelpers.setSubmitting(false);
           return;
         }
-        const sanitized = sanitizeInput(vals.query).trim();
+        const sanitized = sanitizeInput(vals.search).trim();
         await onSubmitSearch(sanitized, locale, router);
         formikHelpers.setSubmitting(false);
       }}
@@ -36,12 +36,12 @@ export default function SearchForm({ initialQuery, locale, router }: Props) {
         <div className="w-full flex flex-col">
           <Form className="flex w-full items-start gap-2">
             <input
-              name="query"
-              value={values.query}
+              name="search"
+              value={values.search}
               placeholder={locale === "ar" ? "  ابحث هنا..." : "  Search..."}
-              dir={hasArabic(values.query) ? "rtl" : locale === "ar" ? "rtl" : "ltr"}
+              dir={hasArabic(values.search) ? "rtl" : locale === "ar" ? "rtl" : "ltr"}
               className="px-3 py-1 bg-[#654545] text-white border border-[#cfcfcf91] rounded-full outline-none w-full"
-              onChange={(e) => setFieldValue("query", sanitizeInput(e.target.value))}
+              onChange={(e) => setFieldValue("search", sanitizeInput(e.target.value))}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
@@ -60,8 +60,8 @@ export default function SearchForm({ initialQuery, locale, router }: Props) {
           </Form>
 
           <div className="min-h-[1rem] mt-2 absolute bottom-[-13px] mx-2 w-full">
-            {errors.query && touched.query && (
-              <div className="text-red-500 text-xs">{errors.query as string}</div>
+            {errors.search && touched.search && (
+              <div className="text-red-500 text-xs">{errors.search as string}</div>
             )}
           </div>
         </div>
