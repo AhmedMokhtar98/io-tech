@@ -1,6 +1,6 @@
 'use client';
 
-import { LEGAL_SERVICES_SECTIONS, LegalServiceSection } from '@/constants/legalServicesData';
+import { SERVICES_SECTIONS, LegalServiceSection } from '@/constants/DummyServicesData';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ export default function Service() {
   const params = useParams();
   const id = params?.id;
 
-  const section: LegalServiceSection | undefined = LEGAL_SERVICES_SECTIONS.find(
+  const section: LegalServiceSection | undefined = SERVICES_SECTIONS.find(
     (s) => s.id === id
   );
 

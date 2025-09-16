@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { FaTwitter, FaFacebookF, FaGooglePlusG } from 'react-icons/fa';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
+import { getEmailSchema } from '@/lib/validations';
 
 interface FormValues {
   email: string;
@@ -22,11 +22,6 @@ export default function Footer() {
     { label: t('services') },
   ];
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email(t('emailInvalid'))
-      .required(t('emailRequired')),
-  });
 
   const handleSubmit = (
     values: FormValues,
@@ -53,7 +48,7 @@ export default function Footer() {
           {/* Email Form */}
           <Formik
             initialValues={{ email: '' }}
-            validationSchema={validationSchema}
+            validationSchema={getEmailSchema(t)}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
@@ -110,7 +105,7 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Copyright Floated Right (or Left in RTL) */}
+        {/* Copyright */}
         <div
           className={`text-white ${
             isRTL ? 'md:order-first md:mr-auto' : 'md:ml-auto'

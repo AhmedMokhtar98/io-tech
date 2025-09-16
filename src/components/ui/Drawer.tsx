@@ -6,7 +6,7 @@ import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import { LEGAL_SERVICES_SECTIONS } from '@/constants/legalServicesData';
+import { SERVICES_SECTIONS } from '@/constants/DummyServicesData';
 
 interface DrawerLink {
   href?: string;
@@ -20,8 +20,8 @@ export default function Drawer({ isRTL = false, links = [] }: { isRTL?: boolean,
   const t = useTranslations("navbar"); 
   const locale = useLocale();
 
-  // Generate services links from LEGAL_SERVICES_SECTIONS
-  const servicesLinks: DrawerLink[] = LEGAL_SERVICES_SECTIONS.map(s => ({
+  // Generate services links from SERVICES_SECTIONS
+  const servicesLinks: DrawerLink[] = SERVICES_SECTIONS.map(s => ({
     href: `/${locale}/services/${s.id}`,
     labelKey: s.titleKey
   }));

@@ -3,16 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Slider, { CustomArrowProps } from "react-slick";
 import Image from "next/image";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { useTranslations, useLocale } from "next-intl";
+import { TeamMember, teamMembers } from "@/constants/DummyTeamData";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-type TeamMember = {
-  nameKey: string;
-  positionKey: string;
-  image: string;
-};
 
 const PrevArrow = ({ onClick }: CustomArrowProps) => (
   <div
@@ -32,14 +28,7 @@ const NextArrow = ({ onClick }: CustomArrowProps) => (
   </div>
 );
 
-const teamMembers: TeamMember[] = [
-  { nameKey: "team.john.name", positionKey: "team.john.position", image: "/me.jpg" },
-  { nameKey: "team.jane.name", positionKey: "team.jane.position", image: "/me.jpg" },
-  { nameKey: "team.alice.name", positionKey: "team.alice.position", image: "/me.jpg" },
-  { nameKey: "team.bob.name", positionKey: "team.bob.position", image: "/me.jpg" },
-];
-
-// Hook to get window size
+// ✅ window size hook stays here
 function useWindowSize() {
   const [size, setSize] = useState({ width: 0, height: 0 });
   useEffect(() => {
@@ -57,15 +46,13 @@ export default function OurTeamSection() {
   const size = useWindowSize();
   const sliderRef = useRef<Slider>(null);
 
-  // Only render slider after we know window width
   const isReady = size.width > 0;
 
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow:
-      size.width >= 1024 ? 3 : size.width >= 640 ? 2 : 1,
+    slidesToShow: size.width >= 1024 ? 3 : size.width >= 640 ? 2 : 1,
     slidesToScroll: 1,
     arrows: true,
     prevArrow: <PrevArrow />,
@@ -82,7 +69,7 @@ export default function OurTeamSection() {
         <div className="relative">
           {isReady && (
             <Slider ref={sliderRef} {...settings}>
-              {teamMembers.map((member, index) => (
+              {teamMembers.map((member: TeamMember, index: number) => (
                 <div key={index} className="px-3">
                   <div className="rounded-lg overflow-hidden p-4 flex flex-col items-center transition-transform hover:scale-105">
                     <div className="relative w-full h-56 sm:h-52 md:h-48 lg:h-56 xl:h-64 mb-4">
@@ -96,27 +83,29 @@ export default function OurTeamSection() {
                     </div>
                     <h3 className="text-lg font-semibold text-[#4A2E2B]">{t(member.nameKey)}</h3>
                     <p className="text-gray-400 text-sm mb-3">{t(member.positionKey)}</p>
+
+                    {/* Contact Icons */}
                     <div className="flex space-x-4 text-gray-500">
                       <Image
                         src="/whats.png"
                         alt="WhatsApp"
                         width={22}
                         height={22}
-                        className="cursor-pointer hover:text-green-500 object-contain m-4"
+                        className="cursor-pointer object-contain m-4"
                       />
                       <Image
                         src="/phone.png"
                         alt="Call"
                         width={25}
                         height={25}
-                        className="cursor-pointer hover:text-blue-500 object-contain m-4"
+                        className="cursor-pointer object-contain m-4"
                       />
                       <Image
                         src="/mail.png"
                         alt="Email"
                         width={22}
                         height={22}
-                        className="cursor-pointer hover:text-red-500 object-contain m-4"
+                        className="cursor-pointer object-contain m-4"
                       />
                     </div>
                   </div>

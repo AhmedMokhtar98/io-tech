@@ -3,7 +3,10 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "next-intl";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
+export function Pagination({
+  className,
+  ...props
+}: React.ComponentProps<"nav">) {
   return (
     <nav
       role="navigation"
@@ -14,11 +17,22 @@ export function Pagination({ className, ...props }: React.ComponentProps<"nav">)
   );
 }
 
-export function PaginationContent({ className, ...props }: React.ComponentProps<"ul">) {
-  return <ul className={cn("flex flex-row items-center gap-1", className)} {...props} />;
+export function PaginationContent({
+  className,
+  ...props
+}: React.ComponentProps<"ul">) {
+  return (
+    <ul
+      className={cn("flex flex-row items-center gap-1", className)}
+      {...props}
+    />
+  );
 }
 
-export function PaginationItem({ className, ...props }: React.ComponentProps<"li">) {
+export function PaginationItem({
+  className,
+  ...props
+}: React.ComponentProps<"li">) {
   return <li className={cn("", className)} {...props} />;
 }
 
@@ -42,11 +56,18 @@ export function PaginationLink({
   );
 }
 
-export function PaginationPrevious({ "aria-label": ariaLabel, children, ...props }: React.ComponentProps<"a">) {
+export function PaginationPrevious({
+  "aria-label": ariaLabel,
+  children,
+  ...props
+}: React.ComponentProps<"a">) {
   const locale = useLocale();
   const Icon = locale === "ar" ? FaChevronRight : FaChevronLeft;
   return (
-    <PaginationLink {...props} aria-label={ariaLabel || (locale === "ar" ? "Previous (rtl)" : "Previous")}>
+    <PaginationLink
+      {...props}
+      aria-label={ariaLabel || (locale === "ar" ? "Previous (rtl)" : "Previous")}
+    >
       <Icon aria-hidden="true" />
       <span className="sr-only">Previous</span>
       {children}
@@ -54,14 +75,81 @@ export function PaginationPrevious({ "aria-label": ariaLabel, children, ...props
   );
 }
 
-export function PaginationNext({ "aria-label": ariaLabel, children, ...props }: React.ComponentProps<"a">) {
+export function PaginationNext({
+  "aria-label": ariaLabel,
+  children,
+  ...props
+}: React.ComponentProps<"a">) {
   const locale = useLocale();
   const Icon = locale === "ar" ? FaChevronLeft : FaChevronRight;
   return (
-    <PaginationLink {...props} aria-label={ariaLabel || (locale === "ar" ? "Next (rtl)" : "Next")}>
+    <PaginationLink
+      {...props}
+      aria-label={ariaLabel || (locale === "ar" ? "Next (rtl)" : "Next")}
+    >
       <Icon aria-hidden="true" />
       <span className="sr-only">Next</span>
       {children}
     </PaginationLink>
+  );
+}
+
+/**
+ * High-level Pagination component for search results
+ * Automatically renders previous/next + numbered links
+ */
+export function PaginationControls({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+
+  return (
+    <Pagination>
+      <PaginationContent>
+        {/* Previous */}
+        <PaginationItem>
+          <PaginationPrevious
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage > 1) onPageChange(currentPage - 1);
+            }}
+          />
+        </PaginationItem>
+
+        {/* Numbered pages */}
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <PaginationItem key={i}>
+            <PaginationLink
+              href="#"
+              isActive={currentPage === i + 1}
+              onClick={(e) => {
+                e.preventDefault();
+                onPageChange(i + 1);
+              }}
+            >
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
+        {/* Next */}
+        <PaginationItem>
+          <PaginationNext
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage < totalPages) onPageChange(currentPage + 1);
+            }}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }

@@ -102,23 +102,21 @@
     "homeButton": "Go Home"
   },
   "testimonials": {
-    "title": "What our clients are saying",
-    "description": "Our clients range from individual investors, to local, international as well as Fortune 500 companies.",
-    "testimonials": [
-    {
-      "name": "Mohammed Saif",
-      "title": "CEO/Company",
-      "quote": "With the help of the hospitable staff of Al Safar and Partners, I was able to get my work done without any hassle. The team guided me through every step with professionalism and kept me updated regularly about the progress of my case. Their prompt responses and attention to detail made me feel supported at all times, which gave me peace of mind and confidence that I was in good hands.",
-      "image": "/me.jpg"
-    },
-    {
-      "name": "John Doe",
-      "title": "Investor",
-      "quote": "My experience with Al Safar and Partners was excellent from the very first consultation. The team listened carefully to my goals, provided clear advice, and helped me make the right decisions with confidence. Their responsiveness and transparency at every stage made the process smooth and stress-free, leaving me reassured that my interests were always a priority.",
-      "image": "/me.jpg"
-    }
-  ]
+  "title": "What our clients are saying",
+  "description": "Our clients range from individual investors, to local, international as well as Fortune 500 companies.",
+
+  "testimonial1": {
+    "name": "Mohammed Saif",
+    "title": "CEO/Company",
+    "quote": "With the help of the hospitable staff of Al Safar and Partners, I was able to get my work done without any hassle. The team guided me through every step with professionalism and kept me updated regularly about the progress of my case. Their prompt responses and attention to detail made me feel supported at all times, which gave me peace of mind and confidence that I was in good hands."
   },
+
+  "testimonial2": {
+    "name": "John Doe",
+    "title": "Investor",
+    "quote": "My experience with Al Safar and Partners was excellent from the very first consultation. The team listened carefully to my goals, provided clear advice, and helped me make the right decisions with confidence. Their responsiveness and transparency at every stage made the process smooth and stress-free, leaving me reassured that my interests were always a priority."
+  }
+},
   "footer": {
     "emailPlaceholder": "Email",
     "subscribe": "Subscribe",
@@ -140,7 +138,10 @@
     "enterQuery": "Please enter a search query.",
     "noResults": "No results found.",
     "minChars": "Enter at least 1 character",
-    "required": "Search is required"
+    "required": "Search is required",
+    "placeholder": "Search...",
+    "onlyLettersNumbers": "Only letters and numbers are allowed.",
+    "minChar": "Enter at least 1 character."
   },
   "services": {
     "searchResults": "Search Results for",

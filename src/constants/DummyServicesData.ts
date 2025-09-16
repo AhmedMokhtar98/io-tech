@@ -10,7 +10,7 @@ export type LegalServiceSection = {
   }[];
 };
 
-export const LEGAL_SERVICES_SECTIONS: LegalServiceSection[] = [
+export const SERVICES_SECTIONS: LegalServiceSection[] = [
   {
     id: 'general',
     titleKey: 'general.title',

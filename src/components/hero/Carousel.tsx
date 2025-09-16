@@ -1,20 +1,13 @@
 'use client';
 
 import React, { useRef, useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { useLocale, useTranslations } from "next-intl";
+import { getDummySlides } from "@/constants/DummySlidesData";
+import Slider from "react-slick";
 import Image from "next/image";
-
-type Slide = {
-  title: string;
-  description: string;
-  buttonText: string;
-  image: string;
-  background: string;
-};
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function FullScreenCarousel() {
   const sliderRef = useRef<Slider>(null);
@@ -22,24 +15,10 @@ export default function FullScreenCarousel() {
   const locale = useLocale();
   const t = useTranslations("carousel");
 
-  // Convert your object (slide1, slide2) into an array with images/backgrounds
-  const slides: Slide[] = [
-    {
-      title: t("slide1.title"),
-      description: t("slide1.description"),
-      buttonText: t("slide1.buttonText"),
-      image: "/me.jpg", // You can customize per slide if needed
-      background: "/cover.png",
-    },
-    {
-      title: t("slide2.title"),
-      description: t("slide2.description"),
-      buttonText: t("slide2.buttonText"),
-      image: "/me.jpg",
-      background: "https://picsum.photos/1920/1080?random=4",
-    },
-  ];
+// Slides Dummy Data
+  const slides = getDummySlides(t);
 
+// Slider settings
   const settings = {
     dots: true,
     infinite: true,
@@ -84,7 +63,7 @@ export default function FullScreenCarousel() {
                 alt={slide.title}
                 fill
                 className="object-cover"
-                priority // optional: load immediately if it’s a hero/background image
+                priority 
               />
             </div>
 
@@ -111,7 +90,7 @@ export default function FullScreenCarousel() {
                   alt={slide.title}
                   fill
                   className="object-cover rounded-lg shadow-lg"
-                  sizes="100vw" // optional, can help with responsive loading
+                  sizes="100vw"
                 />
               </div>
               </div>
