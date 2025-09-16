@@ -7,7 +7,7 @@ export const onlyLettersNumbersSpaces = /^[\p{L}\p{N}\s]+$/u;
 // ----------------- Search Schema -----------------
 export const searchSchema = (t: (key: string) => string) =>
   Yup.object().shape({
-    query: Yup.string()
+    search: Yup.string()
       .trim()
       .matches(
         onlyLettersNumbersSpaces,
